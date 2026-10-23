@@ -4,35 +4,38 @@ const BRAND = {
   tagline: "More than laundry. Complete garment care.",
   phone: "+2348126966400",
   whatsapp: "2348126966400",
-  email: "hello@yourdomain.com",
+  email: "", // add your real email here when you have one
   location: "Ifo, Ogun State, Nigeria"
 };
 
 // ===== 2. PAGE TITLE =====
 document.title = BRAND.brandName + " | " + BRAND.tagline;
 
-// ===== 3. BOOKING FORM: sends the details to WhatsApp =====
+// ===== 3. BOOKING FORM: opens WhatsApp with the customer's details =====
+// Note: nothing is saved on a server. The customer must press Send in WhatsApp.
 const bookingForm = document.getElementById("booking-form");
 const dateInput = document.getElementById("date");
 
-// Block past dates
-dateInput.min = new Date().toISOString().split("T")[0];
+if (bookingForm && dateInput) {
+  // Block past dates
+  dateInput.min = new Date().toISOString().split("T")[0];
 
-bookingForm.addEventListener("submit", function (e) {
-  e.preventDefault();
-  const f = new FormData(bookingForm);
+  bookingForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const f = new FormData(bookingForm);
 
-  const message =
-    "Hello " + BRAND.brandName + ", I would like to book a pickup.\n\n" +
-    "Name: " + f.get("name") + "\n" +
-    "Phone: " + f.get("phone") + "\n" +
-    "Address: " + f.get("address") + "\n" +
-    "Service: " + f.get("service") + "\n" +
-    "Pickup date: " + f.get("date") + "\n" +
-    "Notes: " + (f.get("notes") || "None");
+    const message =
+      "Hello " + BRAND.brandName + ", I would like to book a pickup.\n\n" +
+      "Name: " + f.get("name") + "\n" +
+      "Phone: " + f.get("phone") + "\n" +
+      "Address: " + f.get("address") + "\n" +
+      "Service: " + f.get("service") + "\n" +
+      "Pickup date: " + f.get("date") + "\n" +
+      "Notes: " + (f.get("notes") || "None");
 
-  window.open(
-    "https://wa.me/" + BRAND.whatsapp + "?text=" + encodeURIComponent(message),
-    "_blank"
-  );
-});
+    window.open(
+      "https://wa.me/" + BRAND.whatsapp + "?text=" + encodeURIComponent(message),
+      "_blank"
+    );
+  });
+}

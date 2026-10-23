@@ -14,6 +14,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 80px;
 }
 
 body {
@@ -31,6 +32,21 @@ img {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    transition: none !important;
+  }
 }
 
 /* ===== CONTAINER ===== */
@@ -104,27 +120,26 @@ a {
   color: var(--primary);
 }
 
-/* ===== HERO ===== */
+.main-nav a.btn:hover {
+  color: var(--white);
+}
+
+/* ===== HERO (photo: images/hero-rack.jpg) ===== */
 .hero {
   position: relative;
   overflow: hidden;
-  background: var(--accent);
+  background-color: var(--secondary);
+  background-image:
+    linear-gradient(90deg, rgba(51, 59, 66, 0.92) 0%, rgba(51, 59, 66, 0.75) 45%, rgba(51, 59, 66, 0.15) 100%),
+    url("../hero-rack.jpg");
+  background-size: cover;
+  background-position: center right;
+  background-repeat: no-repeat;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
   padding: 80px 0 70px;
-}
-
-.hero::after {
-  content: "&";
-  position: absolute;
-  right: -20px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-family: "Playfair Display", serif;
-  font-weight: 700;
-  font-size: 420px;
-  line-height: 1;
-  color: var(--primary);
-  opacity: 0.1;
-  pointer-events: none;
+  color: var(--white);
 }
 
 .hero-inner {
@@ -137,7 +152,7 @@ a {
   letter-spacing: 3px;
   font-size: 13px;
   font-weight: 600;
-  color: var(--primary);
+  color: #8FCBF2;
   margin-bottom: 16px;
 }
 
@@ -147,12 +162,14 @@ a {
   line-height: 1.15;
   max-width: 600px;
   margin-bottom: 20px;
+  color: var(--white);
 }
 
 .hero-text {
   font-size: 18px;
-  max-width: 480px;
+  max-width: 520px;
   margin-bottom: 30px;
+  color: var(--white);
 }
 
 .hero-buttons {
@@ -162,6 +179,16 @@ a {
   margin-bottom: 32px;
 }
 
+.hero .btn-outline {
+  color: var(--white);
+  border-color: var(--white);
+}
+
+.hero .btn-outline:hover {
+  background: var(--white);
+  color: var(--secondary);
+}
+
 .trust-points {
   list-style: none;
   display: flex;
@@ -169,11 +196,12 @@ a {
   flex-wrap: wrap;
   font-size: 14px;
   font-weight: 500;
+  color: var(--white);
 }
 
 .trust-points li::before {
   content: "✓ ";
-  color: var(--primary);
+  color: #8FCBF2;
   font-weight: 700;
 }
 
@@ -208,7 +236,49 @@ a {
   margin-bottom: 12px;
 }
 
+/* ===== ABOUT US + PICKUP & DELIVERY (two columns) ===== */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.about-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(51, 59, 66, 0.12);
+}
+
+.about-text h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 36px;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+
+.about-text p {
+  margin-bottom: 16px;
+}
+
+.about-text .section-label {
+  margin-bottom: 10px;
+}
+
 /* ===== HOW IT WORKS ===== */
+.how-image {
+  margin-bottom: 32px;
+}
+
+.how-image img {
+  width: 100%;
+  height: 360px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 16px;
+}
+
 .steps {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -255,6 +325,7 @@ a {
 
 .service-card {
   background: var(--white);
+  border: 1px solid var(--accent);
   border-radius: 12px;
   padding: 28px 24px;
   transition: 0.3s;
@@ -298,12 +369,12 @@ a {
 
 .status.available {
   background: var(--accent);
-  color: var(--primary);
+  color: #2A78AE;
 }
 
 .status.soon {
   background: #EEF0F1;
-  color: #7A838A;
+  color: #5F6970;
 }
 
 /* ===== WHY CHOOSE US ===== */
@@ -349,6 +420,18 @@ a {
   color: rgba(255, 255, 255, 0.75);
 }
 
+.business-image {
+  margin-bottom: 36px;
+}
+
+.business-image img {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  object-position: center 60%;
+  border-radius: 16px;
+}
+
 .business-grid {
   display: flex;
   flex-wrap: wrap;
@@ -372,7 +455,7 @@ a {
 
 .business-card .material-symbols-outlined {
   font-size: 34px;
-  color: var(--primary);
+  color: #8FCBF2;
   margin-bottom: 14px;
 }
 
@@ -391,49 +474,13 @@ a {
   margin-top: 44px;
 }
 
-/* ===== REVIEWS SLIDER ===== */
-.promise-slider {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding: 10px 20px 24px;
-  -webkit-overflow-scrolling: touch;
-}
-
-.promise-card {
-  flex: 0 0 300px;
-  scroll-snap-align: center;
-  background: var(--accent);
-  border-radius: 12px;
-  padding: 30px 26px;
-}
-
-.stars {
-  color: var(--primary);
-  font-size: 18px;
-  letter-spacing: 2px;
-  margin-bottom: 12px;
-}
-
-.review-text {
-  font-style: italic;
-  margin-bottom: 18px;
-}
-
-.review-name {
-  font-weight: 600;
-  font-size: 15px;
-}
-
+/* ===== REVIEWS ===== */
 .review-cta {
   text-align: center;
-  margin-top: 30px;
 }
 
-.review-cta p {
-  margin-bottom: 16px;
-  font-weight: 500;
+.review-cta .section-heading {
+  margin-bottom: 24px;
 }
 
 /* ===== TABLET ===== */
@@ -446,6 +493,15 @@ a {
 
   .business-card {
     width: calc(50% - 12px);
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .about-text h2 {
+    font-size: 28px;
   }
 }
 
@@ -464,6 +520,10 @@ a {
   }
 
   .hero {
+    background-image:
+      linear-gradient(rgba(51, 59, 66, 0.85), rgba(51, 59, 66, 0.85)),
+      url("../images/hero-rack.jpg");
+    min-height: 70vh;
     padding: 50px 0 45px;
   }
 
@@ -475,17 +535,17 @@ a {
     font-size: 16px;
   }
 
-  .hero::after {
-    font-size: 260px;
-    right: -30px;
-  }
-
   .section {
     padding: 55px 0;
   }
 
   .section-heading h2 {
     font-size: 28px;
+  }
+
+  .how-image img,
+  .business-image img {
+    height: 220px;
   }
 }
 
