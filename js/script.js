@@ -39,3 +39,34 @@ if (bookingForm && dateInput) {
     );
   });
 }
+
+// ===== 4. MOBILE MENU TOGGLE =====
+const navToggle = document.getElementById("nav-toggle");
+const mainNav = document.getElementById("main-nav");
+
+if (navToggle && mainNav) {
+  const icon = navToggle.querySelector(".material-symbols-outlined");
+
+  function setMenu(open) {
+    mainNav.classList.toggle("open", open);
+    navToggle.setAttribute("aria-expanded", open);
+    navToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    icon.textContent = open ? "close" : "menu";
+  }
+
+  navToggle.addEventListener("click", function () {
+    setMenu(!mainNav.classList.contains("open"));
+  });
+
+  // Close the menu after tapping a link
+  mainNav.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", function () {
+      setMenu(false);
+    });
+  });
+
+  // Close with the Escape key
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") setMenu(false);
+  });
+}
