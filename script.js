@@ -36,3 +36,12 @@ bookingForm.addEventListener("submit", function (e) {
     "_blank"
   );
 });
+
+// ===== 4. MOBILE MENU =====
+const navToggle = document.getElementById("nav-toggle");
+const mainNav = document.getElementById("main-nav");
+
+navToggle.addEventListener("click", function () {
+  const isOpen = mainNav.classList.toggle("open");
+  navToggle.setAttribute("aria-expanded", isOpen);
+});
